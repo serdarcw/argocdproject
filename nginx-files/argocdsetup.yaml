@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: guestbook-nginx
+  namespace: argocd
+spec:
+  project: default-nginx
+  source:
+    repoURL: https://github.com/serdarcw/argocdproject.git
+    targetRevision: HEAD
+    path: nginx-files
+  destination:
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+
+    automated:
+      selfHeal: true
+      prune: true
