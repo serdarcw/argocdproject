@@ -11,6 +11,7 @@ spec:
     path: kubernetes-files
   destination:
     server: https://kubernetes.default.svc
+    namespace: phonebook
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
