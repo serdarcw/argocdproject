@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: docker.io/serkangumus06/nginx:ryu
+        image: docker.io/serkangumus06/nginx:ken
         ports:
         - containerPort: 80
