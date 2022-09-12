@@ -10,7 +10,7 @@ spec:
     targetRevision: HEAD
     path: kubernetes-files
   destination:
-    server: https://kubernetes.default.svc
+    server: https://kubernetes.phonebook.svc
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
