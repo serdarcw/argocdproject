@@ -4,7 +4,7 @@ metadata:
   name: guestbook-nginx
   namespace: argocd
 spec:
-  project: default-nginx
+  project: default
   source:
     repoURL: https://github.com/serdarcw/argocdproject.git
     targetRevision: HEAD
