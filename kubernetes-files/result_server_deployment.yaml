@@ -6,7 +6,7 @@ metadata:
   labels:
     name: result-app-deploy
 spec:
-  replicas: 2
+  replicas: 4
   selector:
     matchLabels:
       name: result-app-pod
