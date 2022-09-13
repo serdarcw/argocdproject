@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: nginx
-  replicas: 2
+  replicas: 4
   template:
     metadata:
       labels:
@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: docker.io/serkangumus06/nginx:ryu
+        image: docker.io/serkangumus06/nginx:ken
         ports:
         - containerPort: 80
