@@ -184,7 +184,7 @@ spec:
 ```bash
 kubectl apply -f application.yaml
 ```
-- Go to the UI and control If app comes to the dashboard or not. and wait healthy status. but two resuklt and web_server has problem. Show their logs 
+- Go to the UI and control If app comes to the dashboard or not. and wait healthy status. but two result and web_server has problem. Show their logs 
 
 - Go to servers_configmap.yaml file and change ` mysql-service.default.svc.cluster.local` as ` mysql-service.phonebook.svc.cluster.local`
 
