@@ -26,7 +26,6 @@ brew install argocd
 Kubectl port-forwarding can also be used to connect to the API server without exposing the service.
 
 ```bash
-
 kubectl port-forward svc/argocd-server -n argocd 8080:443
 The API server can then be accessed using https://localhost:8080
 ```
@@ -47,7 +46,13 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 
 ## Create you argocd application and deployment
 
-### Create Deployment
+### Create Deployment for nginx
+
+- First we create namespace
+```bash
+kubectl create ns nginx
+```
+- Then we create deployment and service within `deploy.yaml`
 
 ```yaml
 apiVersion: apps/v1
@@ -89,15 +94,16 @@ spec:
   sessionAffinity: None
   type: ClusterIP
 ```
-- create this deploymen
+- create this deployment and service
 ```bash
-k apply -f deploy.yaml
+kubectl apply -f deploy.yaml
 ```
 
 - On our local, we need to do port forwarding 
 ```bash
 kubectl port-forward svc/nginx-myservice -n nginx 8082:80 &
 ```
+
 - Show the web page http://localhost:8082
 
 - Now we need to create argocd settings
@@ -127,11 +133,68 @@ spec:
 
 - create argocd app
 ```bash
-k apply -f application.yaml
+kubectl apply -f application.yaml
 ```
 - Go to the UI and control If app comes to the dashboard or not. and wait healthy status
 
-- 
+- Then we can show the healt status, cdeployment componets, their sub components on UI
+
+- Change the resplica number on Github and refresh on argocd UI
+
+### Create Deployment for phonebook app
+
+- First we create namespace
+```bash
+kubectl create ns phonebook
+```
+- Then we create deployment and service within ./kubernetes-files
+
+- create this deployment and service
+```bash
+kubectl apply -f ./kubernetes-files
+```
+
+- Now we need to create argocd settings
+
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: guestbook
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/serdarcw/argocdproject.git
+    targetRevision: HEAD
+    path: kubernetes-files
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: phonebook
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+
+    automated:
+      selfHeal: true
+      prune: true
+```
+
+- create argocd app
+```bash
+kubectl apply -f application.yaml
+```
+- Go to the UI and control If app comes to the dashboard or not. and wait healthy status. but two resuklt and web_server has problem. Show their logs 
+
+- Go to servers_configmap.yaml file and change ` mysql-service.default.svc.cluster.local` as ` mysql-service.phonebook.svc.cluster.local`
+
+- Then we can show the healt status, cdeployment componets, their sub components on UI
+
+- Change the resplica number on Github and refresh on argocd UI
+
+
+
+
 
 
 
