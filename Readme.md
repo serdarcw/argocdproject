@@ -190,13 +190,12 @@ kubectl apply -f application.yaml
 
 - Then we can show the healt status, cdeployment componets, their sub components on UI
 
-- Change the resplica number on Github and refresh on argocd UI
-
-
-
-
-
 
 
 Referances:
 - https://redhat-scholars.github.io/argocd-tutorial/argocd-tutorial/02-getting_started.html
+
+- https://minikube.sigs.k8s.io/docs/start/
+- https://argo-cd.readthedocs.io/en/stable/getting_started/
+- https://www.youtube.com/watch?v=MeU5_k9ssrs
+
