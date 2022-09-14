@@ -4,7 +4,7 @@ metadata:
     name: servers-configmap
     namespace: phonebook
 data: 
-    MYSQL_DATABASE_HOST: mysql-service.default.svc.cluster.local
+    MYSQL_DATABASE_HOST: mysql-service.phonebook.svc.cluster.local
     MYSQL_USER: clarus
     MYSQL_DATABASE: phonebook
 
